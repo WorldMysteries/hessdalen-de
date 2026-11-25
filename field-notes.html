@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0f0e">
+  <meta name="description" content="Ein lokales Beobachtungsbuch: Datum, Uhrzeit, Richtung und Beschreibung des Lichts direkt im Browser speichern.">
+  <title>Beobachtungsbuch — die Lichter von Hessdalen</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body data-page="notes">
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="index.html" aria-label="Hessdalen — Startseite"><span class="brand-mark" aria-hidden="true"><span></span></span><span class="brand-copy"><strong>HESSDALEN</strong><small>FELDDOSSIER · 01</small></span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Menü öffnen"><span></span><span></span></button>
+      <nav class="primary-nav" id="primary-nav" aria-label="Hauptnavigation">
+        <a href="phenomenon.html" data-page-link="phenomenon">Phänomen</a><a href="timeline.html" data-page-link="timeline">Chronologie</a><a href="science.html" data-page-link="science">Wissenschaft</a><a href="field-notes.html" data-page-link="notes">Feldbuch</a>
+      </nav>
+      <a class="header-index" href="timeline.html"><span class="header-index-dot"></span> FALL ERFORSCHEN</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero page-hero--notes">
+      <div class="container page-hero-inner">
+        <p class="eyebrow"><span class="live-dot"></span> 05 / FELDBUCH</p>
+        <h1>Notieren Sie,<br><em>was Sie sehen.</em></h1>
+        <p class="page-lead">Eine nützliche Beobachtung beginnt mit genauen Details. Dieses Formular speichert Ihre Notizen nur im aktuellen Browser — ohne Konto und ohne Senden an einen Server.</p>
+        <div class="page-hero-meta"><span>LOKALER SPEICHER</span><span>PRIVATE / 01</span></div>
+      </div>
+      <span class="page-hero-orb page-hero-orb--one" aria-hidden="true"></span>
+      <span class="page-hero-orb page-hero-orb--two" aria-hidden="true"></span>
+    </section>
+
+    <section class="section notes-section">
+      <div class="container notes-layout">
+        <div class="notes-intro reveal">
+          <p class="eyebrow eyebrow--muted">BEOBACHTUNGSKARTE</p>
+          <h2 class="section-title">Details zählen mehr<br><em>als Vermutungen.</em></h2>
+          <p class="body-copy">Notieren Sie Uhrzeit und Richtung, beschreiben Sie Farbe, Bewegung und Dauer. Wenn es sicher möglich ist — Wetterbedingungen festhalten und ein Foto mit Angabe des Standorts machen.</p>
+          <div class="note-tip"><span class="note-tip-icon">i</span><p><strong>Eilen Sie nicht mit der Benennung der Quelle.</strong><br>Zuerst das Beobachtete festhalten; Hypothesen gesondert hinzufügen.</p></div>
+          <div class="privacy-note"><span class="privacy-lock" aria-hidden="true">▣</span><p><strong>Privatsphäre:</strong> Die Einträge liegen im localStorage dieses Browsers. Sie werden nicht an einen Server übertragen. Das Löschen der Browserdaten kann das Feldbuch entfernen.</p></div>
+        </div>
+
+        <div class="notes-workspace reveal">
+          <form class="note-form" id="note-form">
+            <div class="form-heading"><span class="form-number">01</span><div><p class="eyebrow eyebrow--muted">NEUER EINTRAG</p><h2>Beobachtung hinzufügen</h2></div></div>
+            <div class="form-grid">
+              <label class="field"><span>Datum <i>*</i></span><input type="date" name="date" required></label>
+              <label class="field"><span>Ortszeit</span><input type="time" name="time"></label>
+              <label class="field"><span>Richtung</span><select name="direction"><option value="">Nicht angegeben</option><option>Nord</option><option>Nordost</option><option>Ost</option><option>Südost</option><option>Süd</option><option>Südwest</option><option>West</option><option>Nordwest</option><option>Unbekannt</option></select></label>
+              <label class="field"><span>Farbe</span><select name="color"><option value="">Nicht angegeben</option><option>Weiß</option><option>Gelb</option><option>Orange</option><option>Rot</option><option>Blau / Hellblau</option><option>Andere / wechselnd</option></select></label>
+              <label class="field field--wide"><span>Dauer (ungefähr)</span><input type="text" name="duration" maxlength="80" placeholder="Zum Beispiel: etwa 30 Sekunden"></label>
+              <label class="field field--wide"><span>Was genau haben Sie beobachtet? <i>*</i></span><textarea name="details" rows="5" maxlength="600" required placeholder="Form, Helligkeit, Bewegung, Beobachtungsbedingungen…"></textarea><small class="field-hint">Fügen Sie keine Adressen, Namen oder anderen personenbezogenen Daten hinzu.</small></label>
+            </div>
+            <div class="form-actions"><button class="button button--amber" type="submit">Eintrag speichern <span aria-hidden="true">＋</span></button><p class="form-status" id="form-status" aria-live="polite"></p></div>
+          </form>
+
+          <section class="saved-notes" aria-labelledby="saved-title">
+            <div class="saved-heading"><div><p class="eyebrow eyebrow--muted">LOKALER SPEICHER</p><h2 id="saved-title">Ihre Einträge <span class="entry-count" id="entry-count">0</span></h2></div><div class="saved-actions"><button type="button" class="small-action" id="export-notes" disabled>CSV-EXPORT</button><button type="button" class="small-action small-action--danger" id="clear-notes" disabled>LEEREN</button></div></div>
+            <div class="note-list" id="note-list" aria-live="polite"></div>
+            <p class="empty-notes" id="empty-notes">Noch keine Einträge.<br><span>Fügen Sie die erste Notiz im Formular oben hinzu.</span></p>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="section notes-reminder-section">
+      <div class="container notes-reminder reveal"><span class="reminder-mark">!</span><p><strong>Sicherheit zuerst.</strong> Beobachten Sie nicht von der Fahrbahn, richten Sie kein Licht in die Augen von Menschen oder Fahrern und nähern Sie sich keinen unbekannten Objekten.</p><a href="science.html" class="underlined-link">Warum die Prüfung zählt <span aria-hidden="true">→</span></a></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-top"><a class="brand brand--footer" href="index.html"><span class="brand-mark" aria-hidden="true"><span></span></span><span class="brand-copy"><strong>HESSDALEN</strong><small>FELDDOSSIER · 01</small></span></a><p>Die rätselhaften Lichter des Hessdalen-Tals<br><span>Ein unabhängiges Informationsprojekt</span></p><a class="footer-up" href="#main">NACH OBEN ↑</a></div>
+    <div class="container footer-bottom"><span>Fakten anhand der Materialien von Project Hessdalen geprüft.</span><span><a href="https://untoldarchive.com/ru/">UntoldArchive.com</a></span></div>
+  </footer>
+</body>
+</html>
